@@ -1,6 +1,6 @@
 # virtual-plant-nursery-go
 
-Proyecto Sprint 1
+Proyecto
 
 Se debe realizar una aplicación software en el lenguaje GO (Golang) de lado del servidor que disponga de 
 servir una API que permita consumir una serie de servicios relacionados a continuación y abordando el 
@@ -35,8 +35,10 @@ nutrientes requeridos.
 - Grado de nutrición de la planta (GN): Es un valor entre 60 y 100, donde si éste es más bajo 
 entonces la planta pierde nutrientes más rápido y si es mayor, lo hace más lentamente, por lo que 
 resiste más tiempo sin requerir nuevamente nutrientes.
+
 Ejemplo de Grado de supervivencia: Se tiene una planta con las siguientes características: GS: 20%., AR: 
 0.2 l., AS: 100%., GH: 50., NR: 12 mg., NS: 100%, GN: 60.
+
 Caso 1: En este caso, la planta tiene toda el agua requerida y lo mismo los nutrientes. Sin embargo, no se 
 le vuelve a agregar agua ni nutrientes. Entonces cada segundo, las cantidades en el sistema de la planta 
 disminuyen de la siguiente manera, la planta pierde 1/50 % (0.02%) de agua y 1/60 % (aprox. 0.016%) de 
@@ -47,6 +49,7 @@ morirá inmediatamente por que tiene un GS del 20%, esto significa que podrá re
 así permitir agregarle agua. El 20% permitirá que la planta resista como si tuviera un 20% de agua en su 
 sistema todavía, pero con el doble de la pérdida, es decir, 2*(1/50) % por lo que tendría 500 segundos (8. 
 3 minutos aprox.) para para planta no muriera por este factor.
+
 Caso 2: En este caso, se le agrega un 30% más agua a la planta, aunque tenga el 100% de AS actualmente
 (dado que 100% equivale en este caso 0.2 litros, entonces 30% sería 0.06 litros). Es decir, que la planta 
 tiene más agua de la que debería, por lo que se hace el mismo cálculo de 2*(1/50) % para calcular el 
@@ -55,11 +58,14 @@ a este valor, la planta se muere por cantidad excesiva de agua. En este caso, la
 (8.3 minutos aprox.) para perder el exceso de agua (este cálculo es con el GS definido). Sin embargo, la 
 cantidad extra agregada es de 0.06 litros que es un 30% extra de agua, lo que le tomaría realmente 750 
 segundos (12.5 minutos). En consecuencia, la planta no alcanza a sobrevivir.
+
 Nota: La información a continuación planteada es inventada para el ejercicio y no significa que el 
 comportamiento y biología de las plantas sea así necesariamente.
+
 La aplicación podrá tener varios usuarios, pero todos con un solo tipo rol, no habrá más roles (no 
 administradores o cosas así). El estado de todas las plantas cambiará por cada unidad de tiempo 
 (segundos) transcurrida.
+
 La API/REST debe cumplir con lo siguiente:
 1. Permitir la realización de todos los CRUD pertinentes.
 2. Ver el estado de una planta en cuestión.
@@ -67,15 +73,17 @@ La API/REST debe cumplir con lo siguiente:
 4. Permitir la agregación de agua tanto por una planta de manera individual o grupal. Unidad litros.
 5. Permitir la agregación de nutrientes tanto por una planta de manera individual o grupal. Unidad 
 miligramos.
+
 La aplicación también deberá simular si una planta muere por deshidratación y/o pérdida de nutrientes
 con una alerta previa cuando esté en riesgo extremo de esto. En cada unidad de tiempo se debe registrar 
 los cambios en la base de datos.
+
 El estudiante debe proponer e implementar una solución software que cumpla mínimo con lo aquí 
 establecido. Si dado el caso, no logra terminar todo, se debe enviar, presentar y sustentar lo realizado. Se 
 evaluará la creatividad, la solución propuesta, funcionalidad, buenas prácticas (por ejemplo, código limpio 
 y comentado), la lógica y dominio del tema.
+
 Condiciones de entrega: 
-Fecha máxima: lunes 12 de junio de 2023, hora 10:00 am.
 Asunto: Sprint 0 – Go.
 Archivo: El proyecto comprimido en un .rar, no enlaces o comparticiones. Recuerde no agregar ningún .exe 
 dentro del .rar. ¡Éxitos
