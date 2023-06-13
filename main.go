@@ -1,8 +1,7 @@
 package main
 
-import "fmt"
+import "virtual-plant-nursery-go/app"
 
 func main() {
-
-	fmt.Println("Hola mundo")
+	app.Start()
 }
