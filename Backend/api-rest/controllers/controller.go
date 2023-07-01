@@ -1,111 +1,99 @@
 package controllers
 
 import (
-	"encoding/json"
 	"net/http"
 	"strconv"
 	"virtual-plant-nursery/api-rest/models"
+
+	"github.com/gin-gonic/gin"
 )
 
 // Obtener el estado de todas las plantas
-
-func GetAllPlants(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(models.ListPlants)
+func GetAllPlants(c *gin.Context) {
+	c.IndentedJSON(http.StatusOK, models.ListPlants)
 }
 
 // Obtener el estado de una planta específica
-func GetPlant(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	id := r.URL.Query().Get("id")
+func GetPlant(c *gin.Context) {
+	id := c.Param("id")
+
 	for _, plant := range models.ListPlants {
 		if plant.ID == id {
-			json.NewEncoder(w).Encode(plant)
+			c.IndentedJSON(http.StatusOK, plant)
 			return
 		}
 	}
-	json.NewEncoder(w).Encode(nil)
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "Planta no encontrada."})
 }
 
 // Crear una nueva planta
-func CreatePlant(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
+func CreatePlant(c *gin.Context) {
 	var plant *models.Plant
-	err := json.NewDecoder(r.Body).Decode(&plant)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+	if err := c.BindJSON(&plant); err != nil {
+		c.IndentedJSON(http.StatusNotFound, gin.H{"error": "Verifique la estructura de los datos."})
 		return
 	}
 	models.ListPlants = append(models.ListPlants, plant)
-	json.NewEncoder(w).Encode(plant)
+	c.IndentedJSON(http.StatusCreated, gin.H{"message": "Planta creada."})
 }
 
-// Actualizar el estado de una planta existente
-func UpdatePlant(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	id := r.URL.Query().Get("id")
+// Actualizar una planta existente
+func UpdatePlant(c *gin.Context) {
+	id := c.Param("id")
+	var updateplant *models.Plant
+	if err := c.BindJSON(&updateplant); err != nil {
+		c.IndentedJSON(http.StatusNotFound, gin.H{"error": "Verifique la estructura de los datos."})
+		return
+	}
 	for index, plant := range models.ListPlants {
 		if plant.ID == id {
 			models.ListPlants = append(models.ListPlants[:index], models.ListPlants[index+1:]...)
-			var updatedPlant *models.Plant
-			err := json.NewDecoder(r.Body).Decode(&updatedPlant)
-			if err != nil {
-				http.Error(w, err.Error(), http.StatusBadRequest)
-				return
-			}
-			models.ListPlants = append(models.ListPlants, updatedPlant)
-			json.NewEncoder(w).Encode(updatedPlant)
+			models.ListPlants = append(models.ListPlants, updateplant)
+			c.IndentedJSON(http.StatusCreated, gin.H{"message": "Planta actualizada."})
 			return
 		}
 	}
-	json.NewEncoder(w).Encode(nil)
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "No existe la planta para actualizar."})
 }
 
 // Eliminar una planta
-func DeletePlant(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	id := r.URL.Query().Get("id")
+func DeletePlant(c *gin.Context) {
+	id := c.Param("id")
+
 	for index, plant := range models.ListPlants {
 		if plant.ID == id {
 			models.ListPlants = append(models.ListPlants[:index], models.ListPlants[index+1:]...)
-			break
+			c.IndentedJSON(http.StatusOK, gin.H{"message": "Planta eliminada."})
+			return
 		}
 	}
-	json.NewEncoder(w).Encode(models.ListPlants)
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "Planta no encontrada."})
 }
 
 // Agregar agua a todas las plantas
-func AddWaterToPlants(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	amountStr := r.URL.Query().Get("amount")
+func AddWaterToPlants(c *gin.Context) {
+	amountStr := c.Param("amount")
 	amount, err := strconv.ParseFloat(amountStr, 64)
 	if err != nil {
-		http.Error(w, "Invalid amount", http.StatusBadRequest)
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"error:": "El valor debe ser numerico."})
 		return
 	}
-
-	//Aqui iria la logica para el agregado de agua en cada planta(calculado los porcentajes)
 	for i := range models.ListPlants {
 		models.ListPlants[i].WaterSystem += amount
 	}
-
-	json.NewEncoder(w).Encode(models.ListPlants)
+	c.IndentedJSON(http.StatusOK, gin.H{"message": "Agua agregada correctamente a todas las plantas."})
 }
 
 // Agregar nutrientes a todas las plantas
-func AddNutrientsToPlants(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	amountStr := r.URL.Query().Get("amount")
+func AddNutrientsToPlants(c *gin.Context) {
+	amountStr := c.Param("amount")
 	amount, err := strconv.ParseFloat(amountStr, 64)
 	if err != nil {
-		http.Error(w, "Invalid amount", http.StatusBadRequest)
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"error:": "El valor debe ser numerico."})
 		return
 	}
-
-	//Aqui iria la logica para el agregado de nutrientas en cada planta(calculado los porcentajes)
 	for i := range models.ListPlants {
 		models.ListPlants[i].NutrientSystem += amount
 	}
-
-	json.NewEncoder(w).Encode(models.ListPlants)
+	c.IndentedJSON(http.StatusOK, gin.H{"message": "Nutrientes agregados correctamente a todas las plantas."})
 }
