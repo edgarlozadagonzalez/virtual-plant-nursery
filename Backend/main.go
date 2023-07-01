@@ -1,7 +1,7 @@
 package main
 
-import apiRest "virtual-plant-nursery/api-rest"
+import app "virtual-plant-nursery/api-rest"
 
 func main() {
-	apiRest.Start()
+	app.Start()
 }
