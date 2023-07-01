@@ -2,7 +2,7 @@ package routes
 
 import (
 	"net/http"
-	"virtual-plant-nursery/app/controllers"
+	"virtual-plant-nursery/api-rest/controllers"
 )
 
 func Routes() {

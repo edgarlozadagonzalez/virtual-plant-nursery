@@ -4,9 +4,9 @@ import (
 	"log"
 	"net/http"
 	"time"
-	"virtual-plant-nursery/app/models"
-	"virtual-plant-nursery/app/routes"
-	"virtual-plant-nursery/app/services"
+	"virtual-plant-nursery/api-rest/models"
+	"virtual-plant-nursery/api-rest/routes"
+	"virtual-plant-nursery/api-rest/services"
 )
 
 func Start() {

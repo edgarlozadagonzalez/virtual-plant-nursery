@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"strconv"
-	"virtual-plant-nursery/app/models"
+	"virtual-plant-nursery/api-rest/models"
 )
 
 // Obtener el estado de todas las plantas

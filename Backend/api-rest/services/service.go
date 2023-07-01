@@ -2,7 +2,7 @@ package services
 
 import (
 	"fmt"
-	"virtual-plant-nursery/app/models"
+	"virtual-plant-nursery/api-rest/models"
 )
 
 // Función que calcula la cantidad de agua en el sistema (AS) de las plantas
