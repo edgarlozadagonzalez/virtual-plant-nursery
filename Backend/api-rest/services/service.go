@@ -11,7 +11,7 @@ func CalculateWaterSystem(plants []*models.Plant) {
 		if plant.SystemWaterReserve == 0 {
 			plant.SystemWaterReserve = plant.SurvivalDegree
 		}
-		if plant.WaterSystem == 0 {
+		if plant.WaterSystem <= 0 {
 			if plant.SystemWaterReserve > 0 {
 				plant.SystemWaterReserve = plant.SystemWaterReserve - (2 / plant.HydrationLevel)
 				fmt.Printf("ALERTA: La planta %s está en riesgo extremo de deshidratación.\n", plant.Name)
@@ -33,7 +33,7 @@ func CalculateNutrientSystem(plants []*models.Plant) {
 		if plant.SystemNutrientReserve == 0 {
 			plant.SystemNutrientReserve = plant.SurvivalDegree
 		}
-		if plant.NutrientSystem == 0 {
+		if plant.NutrientSystem <= 0 {
 			if plant.SystemNutrientReserve > 0 {
 				plant.SystemNutrientReserve = plant.SystemNutrientReserve - (2 / plant.NutritionLevel)
 				fmt.Printf("ALERTA: La planta %s está en riesgo extremo por pérdida de nutrientes.\n", plant.Name)
