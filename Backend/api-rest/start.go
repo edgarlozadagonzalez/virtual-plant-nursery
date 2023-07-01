@@ -8,7 +8,7 @@ import (
 )
 
 func Start() {
-
+	//
 	// Ejecutar las funciones de cálculo cada segundo en goroutines separadas
 	go func() {
 		for {
