@@ -3,7 +3,7 @@ package app
 import (
 	"time"
 	"virtual-plant-nursery/api-rest/models"
-	apiRest "virtual-plant-nursery/api-rest/routes"
+	"virtual-plant-nursery/api-rest/routes"
 	"virtual-plant-nursery/api-rest/services"
 )
 
@@ -23,5 +23,5 @@ func Start() {
 		}
 	}()
 
-	apiRest.Routes()
+	routes.Routes()
 }
