@@ -1,21 +1,17 @@
 package routes
 
 import (
+	"net/http"
 	"virtual-plant-nursery/api-rest/controllers"
-
-	"github.com/gin-gonic/gin"
 )
 
 func Routes() {
 	// Rutas de la API
-	router := gin.Default()
-	router.GET("/plants", controllers.GetAllPlants)
-	router.GET("/plant/:id", controllers.GetPlant)
-	router.POST("/plant/create", controllers.CreatePlant)
-	router.PUT("/plant/update/:id", controllers.UpdatePlant)
-	router.DELETE("/plant/delete/:id", controllers.DeletePlant)
-	router.POST("/plants/water/:amount", controllers.AddWaterToPlants)
-	router.POST("/plants/nutrients/:amount", controllers.AddNutrientsToPlants)
-	router.Run("localhost:8080")
-
+	http.HandleFunc("/plants", controllers.GetAllPlants)
+	http.HandleFunc("/plant", controllers.GetPlant)
+	http.HandleFunc("/plant/create", controllers.CreatePlant)
+	http.HandleFunc("/plant/update", controllers.UpdatePlant)
+	http.HandleFunc("/plant/delete", controllers.DeletePlant)
+	http.HandleFunc("/plants/water", controllers.AddWaterToPlants)
+	http.HandleFunc("/plants/nutrients", controllers.AddNutrientsToPlants)
 }
