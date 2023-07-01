@@ -1,6 +1,6 @@
 package main
 
-import "virtual-plant-nursery/app"
+import app "virtual-plant-nursery/api-rest"
 
 func main() {
 	app.Start()
