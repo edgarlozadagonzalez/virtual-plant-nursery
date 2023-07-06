@@ -2,7 +2,6 @@ package database
 
 import (
 	"fmt"
-
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
@@ -17,5 +16,4 @@ func InitDB() *gorm.DB {
 		panic("Failed to connect to the database!")
 	}
 
-	return db
 }

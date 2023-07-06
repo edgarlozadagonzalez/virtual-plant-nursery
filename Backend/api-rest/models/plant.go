@@ -1,7 +1,12 @@
 package models
 
+import (
+	"github.com/jinzhu/gorm"
+)
+
 // Estructura de datos para representar una planta
 type Plant struct {
+	gorm.Model
 	ID                    string  `json:"id"`
 	Name                  string  `json:"name"`
 	SurvivalDegree        float64 `json:"survival_degree"`
@@ -13,4 +18,5 @@ type Plant struct {
 	NutritionLevel        float64 `json:"nutrition_level"`
 	SystemNutrientReserve float64 `json:"-"`
 	SystemWaterReserve    float64 `json:"-"`
+	Alive	              bool    `json:"alive"`
 }
