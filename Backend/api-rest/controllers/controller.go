@@ -19,9 +19,9 @@ func GetAllPlants(c *gin.Context) {
 // Obtener el estado de una planta específica
 func GetPlant(c *gin.Context) {
 	id := ParseUint(c.Param("id"))
-
 	for _, plant := range services.ListPlants {
 		if plant.ID == id {
+			c.IndentedJSON(http.StatusOK, plant)
 			c.Header("Content-Type", "text/event-stream")
 			c.Header("Cache-Control", "no-cache")
 			c.Header("Connection", "keep-alive")

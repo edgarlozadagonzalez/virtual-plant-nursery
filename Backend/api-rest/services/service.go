@@ -140,10 +140,15 @@ func CalculateNutrientSystem(plants []*models.Plant) {
 }
 
 // Funcion para enviar datos de la planta por el canal
-func GenerateConstantData(plant *models.Plant, dataChannel chan<- models.Plant) {
+func GenerateConstantData(p *models.Plant, dataChannel chan<- models.Plant) {
 
 	for {
-		dataChannel <- *plant
+		plant := models.Plant{
+			WaterSystem:    p.WaterSystem,
+			NutrientSystem: p.NutrientSystem,
+			Alive:          p.Alive,
+		}
+		dataChannel <- plant
 		time.Sleep(time.Second)
 	}
 }

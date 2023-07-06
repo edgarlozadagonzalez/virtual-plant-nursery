@@ -12,6 +12,8 @@ type Plant struct {
 	NutrientSystem        float64 `gorm:"column:nutrient_system" json:"nutrient_system"`
 	NutritionLevel        float64 `gorm:"column:nutrition_level" json:"nutrition_level"`
 	Alive                 bool    `gorm:"column:alive" json:"alive"`
+	Img                   string  `gorm:"column:img" json:"img"`
+	Descrip               string  `gorm:"column:descrip" json:"descrip"`
 	SystemNutrientReserve float64 `gorm:"-" json:"system_nutrient_reserve"`
 	SystemWaterReserve    float64 `gorm:"-" json:"system_water_reserve"`
 }

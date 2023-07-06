@@ -22,19 +22,4 @@ func Routes() {
 	router.POST("/plants/nutrients/:amount", controllers.AddNutrientsToPlants)
 	router.Run("localhost:8080")
 
-	//router.POST("/plants/water/:amount", database.AddWaterToPlants)
-	//router.POST("/plants/nutrients/:amount", database.AddNutrientsToPlants)
-
-	// router.GET("/alerts", database.AlertGet)
-	// router.GET("/alert/:id", database.AlertGetByID)
-	// router.POST("/alert/create", database.AlertCreate)
-	// router.PUT("/alert/update/:id", database.AlertUpdate)
-	// router.DELETE("/alert/delete/:id", database.AlertDelete)
-
-	// router.GET("/records", database.RecordGet)
-	// router.GET("/record/:id", database.RecordGetById)
-	// router.POST("/record/create", database.RecordCreate)
-	// router.PUT("/record/update/:id", database.RecordUpdate)
-	// router.DELETE("/record/delete/:id", database.RecordDelete)
-
 }
