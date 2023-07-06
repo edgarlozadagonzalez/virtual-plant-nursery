@@ -1,7 +1,7 @@
 package models
 
 // Variable para almacenar las plantas ,ejemplo para test provicional.
-var ListPlants = []*Plant{
+/*var ListPlants = []*Plant{
 	{
 		ID:                "1",
 		Name:              "Rosa",
@@ -24,4 +24,4 @@ var ListPlants = []*Plant{
 		NutrientSystem:    10,
 		NutritionLevel:    70,
 	},
-}
+}*/

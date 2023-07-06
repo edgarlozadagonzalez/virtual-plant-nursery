@@ -11,7 +11,7 @@ type Alert struct {
 	AlertID    string    `json:"alert_id"`
 	Reason     string    `json:"reason"`
 	DateTime   time.Time `json:"date_time"`
-	PlantID    string    `json:"plant_id"`
+	//PlantID    string    `json:"plant_id"`
 	Plant      Plant     `gorm:"foreignkey:PlantID"`
 }
 
