@@ -1,18 +1,16 @@
 package database
 
 import (
+	"virtual-plant-nursery/api-rest/models"
 
 	"github.com/gin-gonic/gin"
-	"virtual-plant-nursery/api-rest/models"
-	
-	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
 type AlertRequestBody struct {
-//	AlertID  string `json:"alert_id"`
-	Reason   string `json:"reason"`
-	//DateTime string `json:"date_time"`
-	PlantID  string `json:"plant_id"`
+	AlertID  uint   `gorm:"primaryKey" json:"alert_id"`
+	Reason   string `gorm:"reason" json:"reason"`
+	DateTime string `gorm:"date_time" json:"date_time"`
+	PlantID  string `gorm:"plant_id" json:"plant_id"`
 }
 
 func AlertCreate(c *gin.Context) {
@@ -20,14 +18,13 @@ func AlertCreate(c *gin.Context) {
 	c.BindJSON(&body)
 
 	alert := &models.Alert{
-//		AlertID:  body.AlertID,
-		Reason:   body.Reason,
-	//	DateTime: body.DateTime,
-	//	PlantID:  body.PlantID,
+		//		AlertID:  body.AlertID,
+		Reason: body.Reason,
+		//	DateTime: body.DateTime,
+		//	PlantID:  body.PlantID,
 	}
 
-
-	result := db.Create(&alert)
+	result := Db.Create(&alert)
 
 	if result.Error != nil {
 		c.JSON(500, gin.H{"error": "Failed to insert"})
@@ -39,7 +36,7 @@ func AlertCreate(c *gin.Context) {
 
 func AlertGet(c *gin.Context) {
 	var alerts []models.Alert
-	db.Find(&alerts)
+	Db.Find(&alerts)
 	c.JSON(200, &alerts)
 	return
 }
@@ -47,7 +44,7 @@ func AlertGet(c *gin.Context) {
 func AlertGetByID(c *gin.Context) {
 	id := c.Param("id")
 	var alert models.Alert
-	db.First(&alert, id)
+	Db.First(&alert, id)
 	c.JSON(200, &alert)
 	return
 }
@@ -55,19 +52,19 @@ func AlertGetByID(c *gin.Context) {
 func AlertUpdate(c *gin.Context) {
 	id := c.Param("id")
 	var alert models.Alert
-	db.First(&alert, id)
+	Db.First(&alert, id)
 
 	body := AlertRequestBody{}
 	c.BindJSON(&body)
 
 	data := &models.Alert{
-//		AlertID:  body.AlertID,
-		Reason:   body.Reason,
-	//	DateTime: body.DateTime,
-	//	PlantID:  body.PlantID,
+		//		AlertID:  body.AlertID,
+		Reason: body.Reason,
+		//	DateTime: body.DateTime,
+		//	PlantID:  body.PlantID,
 	}
 
-	result := db.Model(&alert).Updates(data)
+	result := Db.Model(&alert).Updates(data)
 
 	if result.Error != nil {
 		c.JSON(500, gin.H{"error": true, "message": "Failed to update"})
@@ -80,7 +77,7 @@ func AlertUpdate(c *gin.Context) {
 func AlertDelete(c *gin.Context) {
 	id := c.Param("id")
 	var alert models.Alert
-	db.Delete(&alert, id)
+	Db.Delete(&alert, id)
 	c.JSON(200, gin.H{"deleted": true})
 	return
 }
