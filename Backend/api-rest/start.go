@@ -2,12 +2,15 @@ package app
 
 import (
 	"time"
+	"virtual-plant-nursery/api-rest/database"
 	"virtual-plant-nursery/api-rest/models"
 	"virtual-plant-nursery/api-rest/routes"
 	"virtual-plant-nursery/api-rest/services"
 )
 
 func Start() {
+	db := database.InitDB()
+	defer db.Close()
 	// Ejecutar las funciones de cálculo cada segundo en goroutines separadas
 	go func() {
 		for {
