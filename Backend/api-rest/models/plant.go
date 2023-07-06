@@ -20,3 +20,7 @@ type Plant struct {
 	SystemWaterReserve    float64 `json:"-"`
 	Alive	              bool    `json:"alive"`
 }
+
+func (Plant) TableName() string {
+	return "plants"
+}

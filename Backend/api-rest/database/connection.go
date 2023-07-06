@@ -16,4 +16,5 @@ func InitDB() *gorm.DB {
 		panic("Failed to connect to the database!")
 	}
 
+	return db
 }
